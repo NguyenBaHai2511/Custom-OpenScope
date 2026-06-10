@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://openscope.io/assets/airports/airportLoadList.schema.json",
+  "title": "Openscope ATC simulator airport load list schema",
+  "type": "array",
+  "items": {
+    "$ref": "#airport"
+  },
+  "uniqueItems": true,
+  "$defs": {
+    "airport": {
+      "$anchor": "airport",
+      "description": "A data block for a single airport",
+      "type": "object",
+      "properties": {
+        "icao": {
+          "description": "Airport icao identifier in lowercase",
+          "type": "string",
+          "pattern": "^[a-z]{4}$"
+        },
+        "level": {
+          "description": "Difficulty level based on the traffic",
+          "type": "string",
+          "enum": [
+            "beginner",
+            "easy",
+            "medium",
+            "hard"
+          ]
+        },
+        "name": {
+          "description": "Official English name of the airport, according to Jeppesen charts",
+          "type": "string"
+        },
+        "premium": {
+          "description": "Whether airport meets premium standards, according to the airport standards document",
+          "type": "boolean"
+        },
+        "disabled": {
+          "description": "(Optional) Prevents airport from being listed within the game",
+          "type": "boolean"
+        },
+        "_comment": {
+          "$ref": "#comment"
+        }
+      },
+      "required": [
+        "icao",
+        "level",
+        "name",
+        "premium"
+      ],
+      "additionalProperties": false
+    },
+    "comment": {
+      "$anchor": "comment",
+      "description": "A developer comment",
+      "type": "string"
+    }
+  }
+}
